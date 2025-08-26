@@ -19,7 +19,7 @@ SELECT ROUND(SUM(o.Quantity * p.`Price (INR)`), 2) AS total_revenue_inr
 FROM Orders o
 JOIN Products p ON p.Product_ID = o.Product_ID;
 
-Average Order and Delivery Time
+~~Average Order and Delivery Time
 
 SELECT 
     AVG(TIMESTAMPDIFF(
@@ -29,7 +29,7 @@ SELECT
     )) / 86400 AS avg_delivery_days
 FROM Orders o;
 
-Monthly Sales Performance
+~~Monthly Sales Performance
 
 SELECT 
     month(o.Order_Date) AS month,
@@ -42,7 +42,7 @@ GROUP BY month
 ORDER BY month;
 
 
-Top Products by Revenue
+~~Top Products by Revenue
 
 SELECT p.Product_Name, 
        SUM(o.Quantity * p.`Price (INR)`) AS revenue
@@ -53,7 +53,7 @@ ORDER BY revenue DESC
 LIMIT 10;
 
 
-Customer Spending
+~~Customer Spending
 
 SELECT c.Customer_ID, c.Name,
        SUM(o.Quantity * p.`Price (INR)`) AS total_spend,
@@ -64,7 +64,7 @@ JOIN Customers c ON c.Customer_ID = o.Customer_ID
 GROUP BY c.Customer_ID, c.Name
 ORDER BY total_spend DESC;
 
-Top 5 Products – Sales Trend (monthly)
+~~Top 5 Products – Sales Trend (monthly)
 
 SELECT 
     MONTH(o.Order_Date) AS month,
@@ -85,7 +85,7 @@ JOIN (
 GROUP BY month, p.Product_Name
 ORDER BY month, revenue DESC;
 
-Top 10 Cities by Orders
+~~Top 10 Cities by Orders
 
 SELECT o.Location AS city, COUNT(DISTINCT o.Order_ID) AS total_orders
 FROM Orders o
@@ -94,7 +94,7 @@ ORDER BY total_orders DESC
 LIMIT 10;
 
 
-Order Quantity vs Delivery Time
+~~Order Quantity vs Delivery Time
 
 SELECT 
     o.Quantity,
@@ -108,7 +108,7 @@ GROUP BY o.Quantity
 ORDER BY o.Quantity;
 
 
-Revenue by Occasion
+~~Revenue by Occasion
 
 SELECT o.Occasion, SUM(o.Quantity * p.`Price (INR)`) AS revenue
 FROM Orders o
@@ -117,7 +117,7 @@ GROUP BY o.Occasion
 ORDER BY revenue DESC;
 
 
-Product Popularity by Occasion
+~~Product Popularity by Occasion
 
 SELECT o.Occasion, p.Product_Name, COUNT(DISTINCT o.Order_ID) AS order_count
 FROM Orders o
@@ -125,8 +125,7 @@ JOIN Products p ON p.Product_ID = o.Product_ID
 GROUP BY o.Occasion, p.Product_Name
 ORDER BY o.Occasion, order_count DESC;
 
-Customer Retention & Churn
-
+Customer Retention 
 ~Repeat vs One-Time Buyers
 
 SELECT 
@@ -141,7 +140,7 @@ FROM (
 GROUP BY customer_type;
 
 
-Churned Customers (No orders in last 90 days)
+~~Churned Customers (No orders in last 90 days)
 
 SELECT c.customer_id, c.name, MAX(o.order_date) AS last_order_date
 FROM Customers c
@@ -149,7 +148,7 @@ JOIN Orders o ON c.customer_id = o.customer_id
 GROUP BY c.customer_id, c.name
 HAVING DATEDIFF(CURDATE(), MAX(o.order_date)) > 90;
 
-2. Customer Lifetime Value (CLV) Segmentation
+~~Customer Lifetime Value (CLV) Segmentation
 SELECT 
     c.customer_id, 
     c.name,
@@ -165,7 +164,7 @@ join products p on o.product_id=p.product_id
 GROUP BY c.customer_id, c.name
 ORDER BY lifetime_value DESC;
 
-3. Cohort Analysis (Retention)
+~~Cohort Analysis (Retention)
 WITH FirstOrder AS (
     SELECT customer_id, MIN(order_date) AS first_purchase
     FROM Orders
@@ -184,7 +183,7 @@ GROUP BY cohort_month, months_since_signup
 ORDER BY cohort_month, months_since_signup;
 
 
-7. Delivery Performance Impact
+~~Delivery Performance Impact
 
 Delivery Days vs Repeat Purchase Rate
 
@@ -204,7 +203,7 @@ SELECT CASE
 FROM DeliveryStats
 GROUP BY delivery_speed;
 
-8. Geographic Opportunity (Tier-1 vs Tier-2)
+~~Geographic Opportunity (Tier-1 vs Tier-2)
 SELECT location,
        COUNT(order_id) AS total_orders,
        SUM(o.Quantity * p.`Price (INR)`) AS revenue,
@@ -216,7 +215,7 @@ GROUP BY location
 ORDER BY revenue DESC;
 
 
-Gender vs Occasion Preferences
+~~Gender vs Occasion Preferences
 
 SELECT c.gender, o.occasion, COUNT(o.order_id) AS total_orders
 FROM Orders o
@@ -225,7 +224,7 @@ GROUP BY c.gender, o.occasion
 ORDER BY c.gender, total_orders DESC;
 
 
-12. High-Value Customer Targeting
+~~High-Value Customer Targeting
 WITH RankedSpend AS (
     SELECT 
         customer_id,
