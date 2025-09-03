@@ -1,7 +1,7 @@
 # FNP Sales Analysis SQL Project
 
 
-##Introduction
+## Introduction
 
 This project analyzes customer, product, and order data using SQL to extract meaningful business insights. It focuses on **sales performance, customer behavior, product demand, and delivery efficiency**. The dataset includes three main entities:
 - Customers – demographic and profile details
