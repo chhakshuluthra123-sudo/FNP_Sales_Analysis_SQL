@@ -46,8 +46,11 @@ Solution: Queries perform Customer Lifetime Value-based segmentation, gender-occ
 - Personalized Marketing – Use gender and occasion trends to design relevant promotions.
 
 ## Files in This Project
+
 customers.csv → Customer details
+
 products.csv → Product catalog with prices
+
 sqlproject.sql → SQL queries for cleaning, transformation, and analysis
 
 ## Conclusion
